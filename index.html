@@ -7,23 +7,89 @@
 <body style="background-color: black">
   
   <script>
+
+    // Get computer choice by random
    function getComputerChoice() {
     let number = Math.floor(Math.random() * 3);
-    
+   //console.log(number)
     switch (number) {
         case 0: 
-            return "Rock";
+            return "rock";
             break;
         case 1: 
-            return "Paper";
+            return "paper";
             break;
         case 2: 
-            return "Scissor";
+            return "scissor";
             break;
+    }
+    
+   }
+
+   // Play a single round
+
+   // Get user input 
+   function getUserChoice() {
+    let userInput = prompt("What is your decision?");
+    return userInput;
+   }
+   
+   // Compare answers and declare the winner
+   // user = rock and computer = rock - draw
+   // user = rock and computer = scissor - win
+   // user = rock and computer = paper - lose
+   // user = paper and computer = paper - draw
+   // user = paper and computer = scissor - lose
+   // user = paper and computer = rock - win
+   // user = scissor and computer = scissor - draw
+   // user = scissor and computer = rock - lose
+   // user = scissor and computer = paper - win
+   function compareAnswers(userIn, computerIn) {
+    let userInLower = userIn.toLowerCase();
+    let computerInLower = computerIn.toLowerCase();
+    if ((userInLower == "rock" &&  computerInLower == "rock")
+    || (userInLower == "paper" &&  computerInLower == "paper") 
+    || (userInLower == "scissor" &&  computerInLower == "scissor") 
+    ) {
+        return "draw";
+    } else if ((userInLower == "rock" &&  computerInLower == "scissor")
+    || (userInLower == "paper" &&  computerInLower == "rock") 
+    || (userInLower == "scissor" &&  computerInLower == "paper")
+    ) {
+        return "user";
+    } else {
+        return "computer";
     }
    }
 
-   alert(getComputerChoice())
+   // play a game of 5 rounds and declare a winner
+   function game() {
+    let computerCounter = 0;
+    let userCounter = 0;
+    for (let i = 0; i < 5; i++) {
+     let result = compareAnswers(getUserChoice(),getComputerChoice());
+     if (result == "computer") {
+        console.log("The winner is the computer");
+        computerCounter += 1;
+     } else if (result == "user") {
+        console.log("The winner is the user");
+        userCounter += 1;
+     } else {
+        console.log("It was a draw.")
+     }
+    }
+
+    if (computerCounter > userCounter) {
+        alert("The computer has won the game");
+    } else if (computerCounter < userCounter) {
+        alert("The user has won the game");
+    } else {
+        alert("It was a good draw");
+    }
+   }
+
+   //alert(compareAnswers(getUserChoice(),getComputerChoice()))
+   game()
 
   </script>
   
