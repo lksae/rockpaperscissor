@@ -5,6 +5,12 @@
   <title>Rock Paper Scissor </title>
 </head>
 <body style="background-color: black">
+
+    <button onclick="playerSelection('Rock')">Rock</button>
+    <button onclick="playerSelection('Paper')">Paper</button>
+    <button onclick="playerSelection('Scissor')">Scissor</button>
+
+    
   
   <script>
 
@@ -24,6 +30,10 @@
             break;
     }
     
+   }
+
+   function playerSelection(selection) {
+    console.log(selection);
    }
 
    // Play a single round
@@ -63,7 +73,7 @@
    }
 
    // play a game of 5 rounds and declare a winner
-   function game() {
+   /* function game() {
     let computerCounter = 0;
     let userCounter = 0;
     for (let i = 0; i < 5; i++) {
@@ -86,10 +96,10 @@
     } else {
         alert("It was a good draw");
     }
-   }
+   } */
 
    //alert(compareAnswers(getUserChoice(),getComputerChoice()))
-   game()
+   //game()
 
   </script>
   
