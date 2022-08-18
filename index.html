@@ -4,16 +4,24 @@
   <meta charset="UTF-8">
   <title>Rock Paper Scissor </title>
 </head>
-<body style="background-color: black">
+<body style="background-color: white">
 
-    <button onclick="playerSelection('Rock')">Rock</button>
-    <button onclick="playerSelection('Paper')">Paper</button>
-    <button onclick="playerSelection('Scissor')">Scissor</button>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissor">Scissor</button>
+    <div id="results">Play a game</div>
+    <div>User points:</div>
+    <div id="userCounter">0</div>
+    
+    <div>Computer points:</div>
+    <div id="computerCounter">0</div>
+
 
     
   
   <script>
-
+    let userCounter = 0;
+    let computerCounter = 0;
     // Get computer choice by random
    function getComputerChoice() {
     let number = Math.floor(Math.random() * 3);
@@ -66,8 +74,10 @@
     || (userInLower == "paper" &&  computerInLower == "rock") 
     || (userInLower == "scissor" &&  computerInLower == "paper")
     ) {
+        userCounter += 1;
         return "user";
     } else {
+        computerCounter += 1;
         return "computer";
     }
    }
@@ -99,7 +109,60 @@
    } */
 
    //alert(compareAnswers(getUserChoice(),getComputerChoice()))
-   //game()
+   function postResults(userIn, computerIn){
+    //console.log(compareAnswers(userIn, computerIn));
+    
+    let resultText = compareAnswers(userIn, computerIn);
+    const container = document.querySelector('#results');
+     container.textContent = resultText;
+    const userDiv = document.querySelector('#userCounter');
+     userDiv.textContent = userCounter;
+    const computerDiv = document.querySelector('#computerCounter');
+     computerDiv.textContent = computerCounter;
+     if (userCounter == 5) {
+        container.textContent = "User has won the game";
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissor").disabled = true;
+     } else if (computerCounter == 5) {
+        container.textContent = "Computer has won the game";
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissor").disabled = true;
+     }
+    }
+    
+
+   /*const result = document.createElement('div');
+    result.classList.add('result');
+    result.textContent = resultText;
+
+    container.appendChild(result);*/
+
+    
+   
+
+   function playRound(){
+    //computerChoice = ;
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            postResults(button.id,getComputerChoice());
+            //console.log(compareAnswers(button.id,computerChoice));
+            
+        });
+    });
+   }
+   /*function game(){
+    let computerCounter = 0;
+    let userCounter = 0;
+    do {
+        playRound()
+    }
+    while (computerCounter < 5 || userCounter < 5) 
+    }*/
+    playRound()
+   
 
   </script>
   
